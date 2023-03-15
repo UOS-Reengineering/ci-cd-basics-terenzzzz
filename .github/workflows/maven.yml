@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  build-and-test-mac-11:
 
     runs-on: macos-latest
 
@@ -20,8 +20,23 @@ jobs:
     - name: Build with Maven
       run: mvn -B package
 
+  build-and-test-mac-17:
 
-  build-and-test-on-windows:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B package
+
+
+  build-and-test-on-windows-11:
 
     runs-on: windows-latest
 
@@ -36,4 +51,18 @@ jobs:
       - name: Build with Maven
         run: mvn -B package
 
+  build-and-test-windows-17:
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B package
 
